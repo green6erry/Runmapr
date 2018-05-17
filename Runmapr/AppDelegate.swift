@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
-import FirebaseCore
+import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import SwiftyJSON
