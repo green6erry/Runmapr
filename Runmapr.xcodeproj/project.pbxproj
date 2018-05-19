@@ -13,6 +13,8 @@
 		078710C820ADF17F00B7E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078710C620ADF17F00B7E020 /* Main.storyboard */; };
 		078710CA20ADF18000B7E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 078710C920ADF18000B7E020 /* Assets.xcassets */; };
 		078710CD20ADF18000B7E020 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */; };
+		07C6492220AFC96C0082AEFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6492120AFC96C0082AEFC /* CoreLocation.framework */; };
+		07C6492420AFD04C0082AEFC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6492320AFD04C0082AEFC /* Location.swift */; };
 		EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,8 @@
 		078710C920ADF18000B7E020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		078710CC20ADF18000B7E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		078710CE20ADF18000B7E020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07C6492120AFC96C0082AEFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		07C6492320AFD04C0082AEFC /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		5CE033654599923F11850B2F /* Pods-Runmapr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.debug.xcconfig"; sourceTree = "<group>"; };
 		B2F447BAFACD5F9E8C4E1FA5 /* Pods-Runmapr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.release.xcconfig"; sourceTree = "<group>"; };
 		DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runmapr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C6492220AFC96C0082AEFC /* CoreLocation.framework in Frameworks */,
 				EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +70,7 @@
 			children = (
 				078710C220ADF17F00B7E020 /* AppDelegate.swift */,
 				078710C420ADF17F00B7E020 /* ViewController.swift */,
+				07C6492320AFD04C0082AEFC /* Location.swift */,
 				078710C620ADF17F00B7E020 /* Main.storyboard */,
 				078710C920ADF18000B7E020 /* Assets.xcassets */,
 				078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */,
@@ -77,6 +83,7 @@
 		6F544CF5DAF1F363CF998383 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07C6492120AFC96C0082AEFC /* CoreLocation.framework */,
 				DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */,
 			);
 			name = Frameworks;
@@ -234,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				078710C520ADF17F00B7E020 /* ViewController.swift in Sources */,
+				07C6492420AFD04C0082AEFC /* Location.swift in Sources */,
 				078710C320ADF17F00B7E020 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

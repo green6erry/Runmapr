@@ -7,39 +7,65 @@
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
+import CoreLocation
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate  {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var stopRunButton: UIButton!
-    @IBOutlet weak var locationMarker: UIImageView!
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapContainerView: UIView!
+    
+    @IBOutlet weak var durationLabel: UILabel!
+    
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    let manager = CLLocationManager()
+    var locationList = [CLLocation]()
+    var coordsList = [CLLocationCoordinate2D]()
+    private var distance = Measurement(value: 0, unit: UnitLength.meters)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView? = UITableView()
-        tableView?.dataSource = self
-        tableView?.delegate = self
-//        self.view.addSubview(self.tableView)
-        // Do any additional setup after loading the view, typically from a nib.
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+        mapView.delegate = self
+    
     }
-    
-    
-    
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[0]
+        let span : MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let myLocation = location.coordinate
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        mapView.setRegion(region, animated: true)
+        
+        
+        if let lastLocation = locationList.last {
+            let delta = location.distance(from: lastLocation)
+            distance = distance + Measurement(value: delta, unit: UnitLength.meters)
+            let coordinates = [lastLocation.coordinate, myLocation]
+            mapView.add(MKPolyline(coordinates: coordinates, count: 2))
+        }
+        
+        self.mapView.showsUserLocation = true
+    
+        locationList.append(location)
+        
     }
-  
-   
-    @IBAction func historyButton(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
-    }
+
+    
     
     @IBAction func deleteButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func stopRun(_ sender: Any) {
         let alert = UIAlertController(title: "Run Options", message: "Would you like to save this run?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -50,46 +76,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let text = "text"
             print(text)
         }
+        
         alert.addAction(cancel)
         alert.addAction(delete)
         alert.addAction(save)
         present(alert, animated: true, completion: nil)
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    tablVi
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let entry = tableView.dequeueReusableCell(withIdentifier: "tableRow", for: indexPath)
-        entry.textLabel?.text = "Hello World"
-        let dateString = Date().toString(dateFormat: "MMM/dd/yyyy")
-        let listIndex = entry.contentView.viewWithTag(10) as! UILabel?
-        listIndex?.text = "\(indexPath.row + 1)"
-        entry.detailTextLabel?.text = dateString
-        print("table connectd?")
-        return entry
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polylineRender = MKPolylineRenderer(overlay: overlay)
+        polylineRender.strokeColor = UIColor.red.withAlphaComponent(0.5)
+        polylineRender.lineWidth = 5
         
-    }
-   
-
-}
-
-extension Date
-{
-    func toString( dateFormat format  : String ) -> String
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
+        return polylineRender
     }
 }
+
+
     
