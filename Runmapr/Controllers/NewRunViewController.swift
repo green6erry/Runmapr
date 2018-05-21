@@ -162,9 +162,11 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                           "longitude": cLongitude,
                           "coordId": key]
         
-        let coord = Coord(coordId: key, coordData: self.coordDict)
-            
-//
+//        let coord = Coord(coordId: key, coordData: self.coordDict)
+            let coord = ["latitude": cLatitude! as String?
+               "longitude": cLongitude! as String?
+               "coordId": key]
+        
 //            = ["latitude": cLatitude,
 //                     "longitude": cLongitude,
 //                                "coordId": key]
