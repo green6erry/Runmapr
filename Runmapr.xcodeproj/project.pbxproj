@@ -21,6 +21,8 @@
 		07C6497720B211950082AEFC /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497620B211950082AEFC /* NewRunViewController.swift */; };
 		07C6497920B211A80082AEFC /* RunDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497820B211A80082AEFC /* RunDetailsViewController.swift */; };
 		07C6497B20B211B30082AEFC /* RunTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497A20B211B30082AEFC /* RunTableViewController.swift */; };
+		07C6497E20B2868A0082AEFC /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497D20B2868A0082AEFC /* DatabaseService.swift */; };
+		07C6498020B297690082AEFC /* TripSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497F20B297690082AEFC /* TripSnap.swift */; };
 		EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		07C6497620B211950082AEFC /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
 		07C6497820B211A80082AEFC /* RunDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailsViewController.swift; sourceTree = "<group>"; };
 		07C6497A20B211B30082AEFC /* RunTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTableViewController.swift; sourceTree = "<group>"; };
+		07C6497D20B2868A0082AEFC /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		07C6497F20B297690082AEFC /* TripSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSnap.swift; sourceTree = "<group>"; };
 		5CE033654599923F11850B2F /* Pods-Runmapr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.debug.xcconfig"; sourceTree = "<group>"; };
 		B2F447BAFACD5F9E8C4E1FA5 /* Pods-Runmapr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.release.xcconfig"; sourceTree = "<group>"; };
 		DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runmapr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				078710C220ADF17F00B7E020 /* AppDelegate.swift */,
+				07C6497C20B286680082AEFC /* Services */,
 				07C6497220B2114A0082AEFC /* Models */,
 				07C6497520B211730082AEFC /* Controllers */,
 				07C6496E20B20BC90082AEFC /* Visuals */,
@@ -107,6 +112,7 @@
 			children = (
 				07C6492920AFEEE10082AEFC /* Coordinates.swift */,
 				07C6496F20B211390082AEFC /* Trip.swift */,
+				07C6497F20B297690082AEFC /* TripSnap.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +126,14 @@
 				07C6497A20B211B30082AEFC /* RunTableViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		07C6497C20B286680082AEFC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				07C6497D20B2868A0082AEFC /* DatabaseService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		6F544CF5DAF1F363CF998383 /* Frameworks */ = {
@@ -298,6 +312,8 @@
 				07C6497B20B211B30082AEFC /* RunTableViewController.swift in Sources */,
 				07C6497920B211A80082AEFC /* RunDetailsViewController.swift in Sources */,
 				078710C320ADF17F00B7E020 /* AppDelegate.swift in Sources */,
+				07C6498020B297690082AEFC /* TripSnap.swift in Sources */,
+				07C6497E20B2868A0082AEFC /* DatabaseService.swift in Sources */,
 				07C6497420B211620082AEFC /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
