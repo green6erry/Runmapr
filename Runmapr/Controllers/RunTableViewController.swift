@@ -12,14 +12,12 @@ import Firebase
 class RunTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    //prototype cell called "Cell"
+    //prototype cell called "Cell" - to make prettier after Core Location set up
     
     var trips = [Trip]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
         DatabaseService.shared.tripsReference.observe(DataEventType.value) { (snapshot) in
             print(snapshot)
             guard let tripsSnapshot = TripSnap(with: snapshot) else { return }
@@ -75,9 +73,10 @@ class RunTableViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         
         let trip = trips[indexPath.row]
-        cell.textLabel?.text = trip.dateString
+        cell.textLabel?.text = String(describing: trip.date)
         cell.detailTextLabel?.text = trip.distance
         
+        print(cell)
         return cell
     }
     

@@ -13,8 +13,9 @@ struct Trip {
     let tripId: String
     let duration: String
     let distance: String
-    let dateString: String
-    let dateActual: Date
+    let date: Date
+//    let dateString: String
+//    let dateActual: Date
 //    let distance: Double
 //    let duration: Double
     
@@ -24,25 +25,25 @@ struct Trip {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss +zzzz"
         
+        
+//        guard let duration = tripData["duration"] as? String,
+//            let distance = tripData["distance"] as? String,
+//            let dateString = tripData["date"] as? String,
+//            let date = dateFormatter.date(from: dateString)
+//            else { return nil }
+//
+//        self.duration = duration
+//        self.distance = distance
+//        self.date = date
+        
         if let duration = tripData["duration"] as? String {
-            self.duration = duration
-        } else {
-            duration = "1"
-        }
+            self.duration = duration } else { duration = "1" }
         if let distance = tripData["distance"] as? String {
-            self.distance = distance
-        } else {
-            distance = "1"
-        }
-        if let dateString = tripData["dateSting"] as? String {
-            self.dateString = dateString
-        } else {
-            dateString = "1"
-        }
-        if let dateActual = dateFormatter.date(from: dateString) {
-            self.dateActual = dateActual
-        } else {
-            dateActual = Date()
-        }
+            self.distance = distance } else { distance = "1" }
+        let dateString = tripData["date"] as? String
+        if let date = dateFormatter.date(from: dateString!) {
+            self.date = date } else { date = Date() }
+        
+        
     }
 }
