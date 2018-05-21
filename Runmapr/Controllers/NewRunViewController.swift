@@ -23,9 +23,19 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
+    var trips = [Trip]()
+    var date : Date!
+    var dateString: String!
+    var runKey: String!
+    var coordDict: [String: String] = [:]
+//    var cLatitude: String!
+//    var cLongitude: String!
+    
     private let locationManager = LocationManager.shared
     private var locationList = [CLLocation]()
-    private var coordsList = [CLLocationCoordinate2D]()
+    private var coordsList = [Coord]()
+    
+//    public ArrayList<Coord> coordsList = new ArrayList<>();
     private var seconds = 0
     private var timer: Timer?
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
@@ -51,9 +61,9 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "en_US")
         
-        let date = Date()
+        self.date = Date()
         
-        let dateString = dateFormatter.string(from: date)
+        self.dateString = dateFormatter.string(from: date)
 //        print(dateFormatter.string(from: date))
         
         dateLabel.text = dateString
@@ -71,12 +81,16 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let delta = location.distance(from: lastLocation)
             distance = distance + Measurement(value: delta, unit: UnitLength.meters)
             let coordinates = [lastLocation.coordinate, myLocation]
+//            let coords = [myLocation.latitude, myLocation.longitude]
+//            print("coordinates: \(coordinates.)")
             if self.stopButton.isEnabled == true {
                 mapView.add(MKPolyline(coordinates: coordinates, count: 2))
             }
         }
         
         self.mapView.showsUserLocation = true
+        
+        
         locationList.append(location)
         
     }
@@ -90,6 +104,8 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         startButton.isEnabled = false
         closeButton.isEnabled = false
         startUpdatingLocation()
+        self.runKey = DatabaseService.shared.tripsReference.childByAutoId().key as String?
+        print("runKey \(self.runKey!)")
     }
     @IBAction func stopTapped(_ sender: Any) {
         locationManager.stopUpdatingLocation()
@@ -105,8 +121,18 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.dismiss(animated: true, completion: nil)
         }
         let save = UIAlertAction(title: "Save", style: .default) { (UIAlertAction) in
-            let text = "text"
-            print(text)
+            
+            let trip = ["date": self.dateString! as String,
+                        "duration": self.durationLabel.text! as String,
+                        "distance" : self.distanceLabel.text! as String
+//                        "coords": self.coordsList as
+            ]
+            print("trip: \(trip)")
+//            let runKey = DatabaseService.shared.tripsReference.childByAutoId().key
+            print("runKey \(self.runKey)")
+            
+            DatabaseService.shared.tripsReference.child("\(self.runKey)").setValue(trip)
+//            DatabaseService.shared.tripsReference.childByAutoId().setValue(trip)
         }
         
         alert.addAction(cancel)
@@ -118,11 +144,41 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func perSecond() {
         seconds += 1
         updateDisplay()
+        addCoord()
+        
     }
      func updateDisplay() {
         distanceLabel.text = formatDistance(distance)
         durationLabel.text = formatTime(seconds)
     }
+    
+    
+    func addCoord() {
+        let cLatitude = String(describing: locationList.last?.coordinate.latitude)
+        let cLongitude = String(describing: locationList.last?.coordinate.longitude)
+        let key = DatabaseService.shared.tripsReference.child("\(self.runKey!)/coords").childByAutoId().key
+        
+        self.coordDict = ["latitude": cLatitude,
+                          "longitude": cLongitude,
+                          "coordId": key]
+        
+        let coord = Coord(coordId: key, coordData: self.coordDict)
+            
+//
+//            = ["latitude": cLatitude,
+//                     "longitude": cLongitude,
+//                                "coordId": key]
+        print("coords: \(String(describing: coord))")
+        
+//        locations[0]
+//        let coord = ["latitude": locations[0]! as String,
+//                    "duration": self.durationLabel.text! as String,
+//                    "distance" : self.distanceLabel.text! as String,
+//                    "coords": self.coordsList! as Array
+//        ]
+//        print("trip: \(trip)")
+    }
+
     
     func startUpdatingLocation(){
         locationManager.distanceFilter = 10

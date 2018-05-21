@@ -49,6 +49,7 @@ class RunTableViewController: UIViewController, UITableViewDelegate, UITableView
             let distance = 23
             let distanceString = String(distance)
             
+            
             let parameters = ["duration":   text,
                               "distance":   distanceString,
                               "date":       dateString]
