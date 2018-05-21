@@ -9,26 +9,38 @@
 /* Begin PBXBuildFile section */
 		0726D79620ADFE250058B04F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0726D79520ADFE250058B04F /* GoogleService-Info.plist */; };
 		078710C320ADF17F00B7E020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078710C220ADF17F00B7E020 /* AppDelegate.swift */; };
-		078710C520ADF17F00B7E020 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078710C420ADF17F00B7E020 /* ViewController.swift */; };
 		078710C820ADF17F00B7E020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078710C620ADF17F00B7E020 /* Main.storyboard */; };
 		078710CA20ADF18000B7E020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 078710C920ADF18000B7E020 /* Assets.xcassets */; };
 		078710CD20ADF18000B7E020 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */; };
 		07C6492220AFC96C0082AEFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6492120AFC96C0082AEFC /* CoreLocation.framework */; };
-		07C6492420AFD04C0082AEFC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6492320AFD04C0082AEFC /* Location.swift */; };
-		EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */; };
+		07C6492A20AFEEE10082AEFC /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6492920AFEEE10082AEFC /* Coordinates.swift */; };
+		07C6496920B2084B0082AEFC /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6496820B2084B0082AEFC /* FirebaseCore.framework */; };
+		07C6496B20B2085C0082AEFC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6496A20B2085C0082AEFC /* FirebaseDatabase.framework */; };
+		07C6497020B211390082AEFC /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6496F20B211390082AEFC /* Trip.swift */; };
+		07C6497420B211620082AEFC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497320B211620082AEFC /* HomeViewController.swift */; };
+		07C6497720B211950082AEFC /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497620B211950082AEFC /* NewRunViewController.swift */; };
+		07C6497920B211A80082AEFC /* RunDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497820B211A80082AEFC /* RunDetailsViewController.swift */; };
+		07C6497B20B211B30082AEFC /* RunTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497A20B211B30082AEFC /* RunTableViewController.swift */; };
+		EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0726D79520ADFE250058B04F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		078710BF20ADF17F00B7E020 /* Runmapr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runmapr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		078710C220ADF17F00B7E020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		078710C420ADF17F00B7E020 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		078710C720ADF17F00B7E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		078710C920ADF18000B7E020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		078710CC20ADF18000B7E020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		078710CE20ADF18000B7E020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07C6492120AFC96C0082AEFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		07C6492320AFD04C0082AEFC /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		07C6492920AFEEE10082AEFC /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		07C6496820B2084B0082AEFC /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07C6496A20B2085C0082AEFC /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07C6496F20B211390082AEFC /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		07C6497320B211620082AEFC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		07C6497620B211950082AEFC /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
+		07C6497820B211A80082AEFC /* RunDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailsViewController.swift; sourceTree = "<group>"; };
+		07C6497A20B211B30082AEFC /* RunTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTableViewController.swift; sourceTree = "<group>"; };
 		5CE033654599923F11850B2F /* Pods-Runmapr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.debug.xcconfig"; sourceTree = "<group>"; };
 		B2F447BAFACD5F9E8C4E1FA5 /* Pods-Runmapr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.release.xcconfig"; sourceTree = "<group>"; };
 		DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runmapr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C6496B20B2085C0082AEFC /* FirebaseDatabase.framework in Frameworks */,
+				07C6496920B2084B0082AEFC /* FirebaseCore.framework in Frameworks */,
 				07C6492220AFC96C0082AEFC /* CoreLocation.framework in Frameworks */,
 				EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */,
 			);
@@ -69,20 +83,50 @@
 			isa = PBXGroup;
 			children = (
 				078710C220ADF17F00B7E020 /* AppDelegate.swift */,
-				078710C420ADF17F00B7E020 /* ViewController.swift */,
-				07C6492320AFD04C0082AEFC /* Location.swift */,
-				078710C620ADF17F00B7E020 /* Main.storyboard */,
-				078710C920ADF18000B7E020 /* Assets.xcassets */,
-				078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */,
+				07C6497220B2114A0082AEFC /* Models */,
+				07C6497520B211730082AEFC /* Controllers */,
+				07C6496E20B20BC90082AEFC /* Visuals */,
 				078710CE20ADF18000B7E020 /* Info.plist */,
 				0726D79520ADFE250058B04F /* GoogleService-Info.plist */,
 			);
 			path = Runmapr;
 			sourceTree = "<group>";
 		};
+		07C6496E20B20BC90082AEFC /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+				078710C620ADF17F00B7E020 /* Main.storyboard */,
+				078710C920ADF18000B7E020 /* Assets.xcassets */,
+				078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */,
+			);
+			path = Visuals;
+			sourceTree = "<group>";
+		};
+		07C6497220B2114A0082AEFC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				07C6492920AFEEE10082AEFC /* Coordinates.swift */,
+				07C6496F20B211390082AEFC /* Trip.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		07C6497520B211730082AEFC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				07C6497320B211620082AEFC /* HomeViewController.swift */,
+				07C6497620B211950082AEFC /* NewRunViewController.swift */,
+				07C6497820B211A80082AEFC /* RunDetailsViewController.swift */,
+				07C6497A20B211B30082AEFC /* RunTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		6F544CF5DAF1F363CF998383 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07C6496A20B2085C0082AEFC /* FirebaseDatabase.framework */,
+				07C6496820B2084B0082AEFC /* FirebaseCore.framework */,
 				07C6492120AFC96C0082AEFC /* CoreLocation.framework */,
 				DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */,
 			);
@@ -133,6 +177,14 @@
 				TargetAttributes = {
 					078710BE20ADF17F00B7E020 = {
 						CreatedOnToolsVersion = 9.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -240,9 +292,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				078710C520ADF17F00B7E020 /* ViewController.swift in Sources */,
-				07C6492420AFD04C0082AEFC /* Location.swift in Sources */,
+				07C6497720B211950082AEFC /* NewRunViewController.swift in Sources */,
+				07C6497020B211390082AEFC /* Trip.swift in Sources */,
+				07C6492A20AFEEE10082AEFC /* Coordinates.swift in Sources */,
+				07C6497B20B211B30082AEFC /* RunTableViewController.swift in Sources */,
+				07C6497920B211A80082AEFC /* RunDetailsViewController.swift in Sources */,
 				078710C320ADF17F00B7E020 /* AppDelegate.swift in Sources */,
+				07C6497420B211620082AEFC /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 92TM8QQ744;
 				INFOPLIST_FILE = Runmapr/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -397,7 +454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.agreenb.runmapr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -409,6 +466,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 92TM8QQ744;
 				INFOPLIST_FILE = Runmapr/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -416,7 +474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.agreenb.runmapr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
