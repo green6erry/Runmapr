@@ -6,11 +6,22 @@
 //
 
 import UIKit
+import MapKit
 
 class RunDetailsViewController: UIViewController {
 
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
+    
+//    var selectedTrip: Trip!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dateLabel.text = "Date"
+        self.durationLabel.text = "Duration"
+        self.distanceLabel.text = "distanceLabel"
 
         // Do any additional setup after loading the view.
     }
@@ -21,14 +32,13 @@ class RunDetailsViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+//extension RunDetailsViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        // 1
+//        guard let cell = tableView.cellForRow(at: indexPath) as? RunTableViewCell else { return }
+//    }
+
+//?

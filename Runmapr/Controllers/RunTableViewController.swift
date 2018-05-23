@@ -9,25 +9,90 @@
 import UIKit
 import Firebase
 
-class RunTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RunTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     //prototype cell called "Cell" - to make prettier after Core Location set up
     
+    
     var trips = [Trip]()
+    
+    var selectedTrip : Trip!
+    var detailView: RunDetailsViewController! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
+//        navigationItem.title = "Run History"
+        
         DatabaseService.shared.tripsReference.observe(DataEventType.value) { (snapshot) in
             print(snapshot)
             guard let tripsSnapshot = TripSnap(with: snapshot) else { return }
             self.trips = tripsSnapshot.trips
             self.tableView.reloadData()
         }
+        
     }
 
     @IBAction func doneTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
+
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return trips.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RunTableViewCell
+        let trip : Trip
+        trip = trips[indexPath.row]
+        cell.dateLabel.text = String(describing: trip.date)
+        cell.distanceLabel.text = trip.distance
+        cell.durationLabel.text = trip.duration
+        cell.indexLabel.text = "No. \(indexPath.row)"
+        
+        print(cell)
+        return cell
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? RunDetailsViewController,
+//            let indexPath = tableView.indexPathForSelectedRow {
+//            destination.selectedTrip = trips[indexPath.row]
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let detailView = storyboard?.instantiateViewController(withIdentifier: "RunDetailsViewController") as? RunDetailsViewController
+//        //        let rtrip = trips[indexPath.row]
+//        //        detailView?.distanceLabel!.text = rtrip.distance
+//
+//        self.navigationController?.pushViewController(detailView!, animated: true)
+        
+        
+        
+//        var self.selectedTrip = trips[indexPath.row]
+//        let trip : Trip!
+//        _ = trips[indexPath.row]
+//        print(trip: )
+        
+//        detailView.distanceLabel?.text = trip.distance
+//        detailView.distanceLabel!.text = "butt"
+//        detailView?.durationLabel.text = trip.duration
+//        detailView?.dateLabel.text = String(describing: trip.date)
+        
+//        self.navigationController?.pushViewController((detailView)!, animated: true)
+    }
+    
     @IBAction func addTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add run", message: "add sample data", preferredStyle: .alert)
         
@@ -42,48 +107,33 @@ class RunTableViewController: UIViewController, UITableViewDelegate, UITableView
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let post = UIAlertAction(title: "Post", style: .default) { _ in
-            guard let text = alert.textFields?.first?.text else { return }
+            guard let text = alert.textFields?.description else { return }
+//            guard let text = alert.textFields?.first?.text else { return }
             print(text)
-//
+            
             let dateString = String(describing: Date())
             let distance = 23
             let distanceString = String(distance)
             
-            
             let parameters = ["duration":   text,
                               "distance":   distanceString,
                               "date":       dateString]
+            let key = DatabaseService.shared.tripsReference.childByAutoId().key as String?
             
-            DatabaseService.shared.tripsReference.childByAutoId().setValue(parameters)
+            let newTrip = Trip(tripId: key!, tripData: parameters)
+            
+            DatabaseService.shared.tripsReference.childByAutoId().setValue(newTrip)
+            self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(cancel)
         alert.addAction(post)
-        present(alert, animated: true, completion: nil)
-        
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trips.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        
-        let trip = trips[indexPath.row]
-        cell.textLabel?.text = String(describing: trip.date)
-        cell.detailTextLabel?.text = trip.distance
-        
-        print(cell)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        present(alert, animated: true) {
+            print(alert.textFields as Any)
+        }
         
     }
 
 }
+
+
 

@@ -14,8 +14,6 @@
 		078710CD20ADF18000B7E020 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */; };
 		07C6492220AFC96C0082AEFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6492120AFC96C0082AEFC /* CoreLocation.framework */; };
 		07C6492A20AFEEE10082AEFC /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6492920AFEEE10082AEFC /* Coord.swift */; };
-		07C6496920B2084B0082AEFC /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6496820B2084B0082AEFC /* FirebaseCore.framework */; };
-		07C6496B20B2085C0082AEFC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6496A20B2085C0082AEFC /* FirebaseDatabase.framework */; };
 		07C6497020B211390082AEFC /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6496F20B211390082AEFC /* Trip.swift */; };
 		07C6497420B211620082AEFC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497320B211620082AEFC /* HomeViewController.swift */; };
 		07C6497720B211950082AEFC /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6497620B211950082AEFC /* NewRunViewController.swift */; };
@@ -26,6 +24,7 @@
 		07C6498220B2AD950082AEFC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C6498120B2AD950082AEFC /* MapKit.framework */; };
 		07C6498420B2B10C0082AEFC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6498320B2B10C0082AEFC /* LocationManager.swift */; };
 		07C6498620B2B42F0082AEFC /* CoordSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6498520B2B42E0082AEFC /* CoordSnap.swift */; };
+		07C6498A20B39C700082AEFC /* RunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6498920B39C700082AEFC /* RunTableViewCell.swift */; };
 		EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -51,6 +50,7 @@
 		07C6498120B2AD950082AEFC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07C6498320B2B10C0082AEFC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		07C6498520B2B42E0082AEFC /* CoordSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordSnap.swift; sourceTree = "<group>"; };
+		07C6498920B39C700082AEFC /* RunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTableViewCell.swift; sourceTree = "<group>"; };
 		5CE033654599923F11850B2F /* Pods-Runmapr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.debug.xcconfig"; sourceTree = "<group>"; };
 		B2F447BAFACD5F9E8C4E1FA5 /* Pods-Runmapr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runmapr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runmapr/Pods-Runmapr.release.xcconfig"; sourceTree = "<group>"; };
 		DB740DAD76C2AC7ADC9D0B9C /* Pods_Runmapr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runmapr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,8 +62,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07C6498220B2AD950082AEFC /* MapKit.framework in Frameworks */,
-				07C6496B20B2085C0082AEFC /* FirebaseDatabase.framework in Frameworks */,
-				07C6496920B2084B0082AEFC /* FirebaseCore.framework in Frameworks */,
 				07C6492220AFC96C0082AEFC /* CoreLocation.framework in Frameworks */,
 				EC562CFA0F5341064C9DD26D /* Pods_Runmapr.framework in Frameworks */,
 			);
@@ -108,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				078710C620ADF17F00B7E020 /* Main.storyboard */,
+				07C6498920B39C700082AEFC /* RunTableViewCell.swift */,
 				078710C920ADF18000B7E020 /* Assets.xcassets */,
 				078710CB20ADF18000B7E020 /* LaunchScreen.storyboard */,
 			);
@@ -325,6 +324,7 @@
 				07C6497920B211A80082AEFC /* RunDetailsViewController.swift in Sources */,
 				078710C320ADF17F00B7E020 /* AppDelegate.swift in Sources */,
 				07C6498020B297690082AEFC /* TripSnap.swift in Sources */,
+				07C6498A20B39C700082AEFC /* RunTableViewCell.swift in Sources */,
 				07C6497E20B2868A0082AEFC /* DatabaseService.swift in Sources */,
 				07C6497420B211620082AEFC /* HomeViewController.swift in Sources */,
 			);

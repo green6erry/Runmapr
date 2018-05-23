@@ -13,3 +13,5 @@ class LocationManager {
     
     private init() { }
 }
+
+//private let locationManager = LocationManager.shared

@@ -9,12 +9,12 @@
 import Foundation
 
 struct Coord {
-    var coordId: String?
-    var longitude: String?
-    var latitude: String?
+    var coordId: String = "0"
+    var longitude: String = "0"
+    var latitude: String = "0"
     
     init?(coordId: String?, coordData: Dictionary <String, Any>){
-        self.coordId = coordId
+        self.coordId = coordId!
         
         guard let latitude = coordData["latitude"] as? String,
         let longitude = coordData["longitude"] as? String
@@ -25,12 +25,12 @@ struct Coord {
 
 //
 //            if let latitude = coordData["latitude"] as? String {
-//                self.latitude = Int(latitude)
+//                self.latitude = Sting(latitude)
 //            } else {
 //                latitude = 1
 //            }
 //            if let longitude = coordData["longitude"] as? String {
-//                self.longitude = Int(longitude)
+//                self.longitude = String(longitude)
 //            } else {
 //                longitude = 1
 //            }
