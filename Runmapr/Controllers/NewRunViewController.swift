@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import Firebase
+import SwiftyJSON
 
 class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
@@ -22,21 +23,22 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var mapView: MKMapView!
     
     
+    
     var trips = [Trip]()
+    var coords = [Coord]()
     var date : Date!
     var dateString: String!
     var runKey: String!
-//    var coordDict: [String: String] = [:]
-//    var cLatitude: String!
-//    var cLongitude: String!
+    var myCoordinates : CLLocationCoordinate2D!
     
     private let locationManager = LocationManager.shared
     private var locationList = [CLLocation]()
     
-    private var latitudes = [String]()
-    private var longitudes = [String]()
+//    private var latitudes = [String]()
+//    private var longitudes = [String]()
     
 //    public ArrayList<Coord> coordsList = new ArrayList<>();
+    var tripData : [String: String] = [:]
     private var seconds = 0
     private var timer: Timer?
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
@@ -69,35 +71,48 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         dateLabel.text = dateString
         print("dateString \(dateString)")
+        self.runKey = DatabaseService.shared.tripsReference.childByAutoId().key
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         let location = locations[0]
+        
         let span : MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-        let myLocation = location.coordinate
-        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        mapView.setRegion(region, animated: true)
+        self.myCoordinates = location.coordinate
         
 
         
+        print("myLocation.latitude \(location.coordinate.latitude)")
+//        print("JSONmyLocation \(JSON(myLocation))")
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(myCoordinates, span)
+        mapView.setRegion(region, animated: true)
+        
+
+
         if let lastLocation = locationList.last {
             let delta = location.distance(from: lastLocation)
             distance = distance + Measurement(value: delta, unit: UnitLength.meters)
-            let coordinates = [lastLocation.coordinate, myLocation]
+            let coordinates = [lastLocation.coordinate, self.myCoordinates!]
 //            let coords = [myLocation.latitude, myLocation.longitude]
 //            print("coordinates: \(coordinates.)")
             if self.stopButton.isHidden == false {
                 mapView.add(MKPolyline(coordinates: coordinates, count: 2))
             }
         }
+        locationList.append(location)
         
         self.mapView.showsUserLocation = true
-        locationList.append(location)
+        
+        print("locationList \(locationList)")
         
     }
     
     @IBAction func exitTapped(_ sender: Any){
-        self.dismiss(animated: true, completion: nil)
+        locationManager.stopUpdatingLocation()
+        dismiss(animated: true, completion: nil)
+        DatabaseService.shared.coordsReference.child("\(self.runKey!)").setValue(nil)
+        
     }
 
     
@@ -109,9 +124,8 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         stopButton.isHidden = false
         startButton.isHidden = true
         closeButton.isHidden = true
-
+        addCoord()
         startUpdatingLocation()
-        self.runKey = DatabaseService.shared.tripsReference.childByAutoId().key as String?
         print("runKey \(self.runKey!)")
     }
     @IBAction func stopTapped(_ sender: Any) {
@@ -127,26 +141,27 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let alert = UIAlertController(title: "Run Options", message: "Would you like to save this run?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive)  { (UIAlertAction) in
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                DatabaseService.shared.coordsReference.child("\(self.runKey!)").setValue(nil)
+            })
         }
         let save = UIAlertAction(title: "Save", style: .default) { (UIAlertAction) in
-           self.runKey = DatabaseService.shared.tripsReference.childByAutoId().key
+//           self.runKey = DatabaseService.shared.tripsReference.childByAutoId().key
             
             let key = self.runKey! as String
             //            print("runKey \(self.runKey)")
             
-            let trip =  ["date": self.dateLabel.text! as String,
+            self.tripData =  ["date": self.dateLabel.text! as String,
+//                              "date": self.dateLabel.text! as String,
                          "duration": self.durationLabel.text! as String,
                          "distance" : self.distanceLabel.text! as String]
-            //                        "latitudes": self.latitudes as Array,
-            //                        "longitudes": self.longitudes as Array
             
-            //            print("trip: \(trip)")
-            
+
+//            print("tripData \(self.tripData)")
             
             
-            DatabaseService.shared.tripsReference.child("\(key)").setValue(trip)
-            //            DatabaseService.shared.tripsReference.childByAutoId().setValue(trip)
+
+            DatabaseService.shared.tripsReference.child("\(key)").setValue(self.tripData)
             self.dismiss(animated: true, completion: nil)
 
         }
@@ -169,27 +184,12 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     
     func addCoord() {
-        let cLongitude = String(describing: locationList[0].coordinate.longitude) as String?
-        let cLatitude = String(describing: locationList[0].coordinate.latitude) as String?
+        let coordKey = DatabaseService.shared.coordsReference.child("\(self.runKey)").childByAutoId().key
+        let coordData = [ "latitude": String(self.myCoordinates.latitude),
+                          "longitude": String(self.myCoordinates.longitude)
+        ]
         
-//        let coordKey = DatabaseService.shared.tripsReference.child("\(self.runKey!)/coords").childByAutoId().key
-        
-        longitudes.append(cLongitude!)
-        latitudes.append(cLatitude!)
-        
-//        let coord = ["latitude": cLatitude,
-//                     "cLongitude": cLongitude,
-//                     "coordId": coordKey]
-//        let coordData = ["latitude": cLatitude,
-//                     "longitude": cLongitude]
-//
-//
-//        self.coordsList.append(Coord(coordId: coordKey, coordData: coordData)!)
-//        print(self.coordsList)
-        
-//        Dictionary<String, Any>
-        
-//        DatabaseService.shared.tripsReference.child("\(self.runKey)").child("coords").child("\(coordKey)").setValue(Coord(coordId: coordKey, coordData: coordData))
+        DatabaseService.shared.coordsReference.child("\(self.runKey!)").child("\(coordKey)").setValue(coordData)
         
 
     }
@@ -222,7 +222,5 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         return polylineRender
     }
-    
-
 
 }

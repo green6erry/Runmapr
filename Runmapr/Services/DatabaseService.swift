@@ -15,6 +15,7 @@ class DatabaseService {
     
 //    let ref = Database.database().reference()
     let tripsReference = Database.database().reference().child("trips")
+    let coordsReference = Database.database().reference().child("coords")
 }
 
 //DatabaseService.shared.Database.database().reference().child("runs").child
