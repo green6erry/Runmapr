@@ -28,9 +28,5 @@ struct Trip  {
             self.distance = distance } else { distance = "1" }
         if let date = tripData["date"] as? String {
             self.date = date } else { date = "0" }
-        }
-    
-
-        
-    
+    }
 }
