@@ -68,23 +68,24 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.date = Date()
         let dateString = dateFormatter.string(from: self.date)
         print(dateFormatter.string(from: date))
-        
         dateLabel.text = dateString
-        print("dateString \(dateString)")
+        
+//       create an id for the active run
         self.runKey = DatabaseService.shared.tripsReference.childByAutoId().key
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+//       identify most recent location
         let location = locations[0]
         
+        //move map with location change
         let span : MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        
+        //isolate just the coordinates of the location object
         self.myCoordinates = location.coordinate
         
 
-        
-        print("myLocation.latitude \(location.coordinate.latitude)")
-//        print("JSONmyLocation \(JSON(myLocation))")
         let region: MKCoordinateRegion = MKCoordinateRegionMake(myCoordinates, span)
         mapView.setRegion(region, animated: true)
         
@@ -94,17 +95,27 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let delta = location.distance(from: lastLocation)
             distance = distance + Measurement(value: delta, unit: UnitLength.meters)
             let coordinates = [lastLocation.coordinate, self.myCoordinates!]
-//            let coords = [myLocation.latitude, myLocation.longitude]
-//            print("coordinates: \(coordinates.)")
+
+            //a sneaky way to do tasks specific to when running has begun
             if self.stopButton.isHidden == false {
                 mapView.add(MKPolyline(coordinates: coordinates, count: 2))
+                //add coords to a different database, but with an id the same as the active run
+                let coordKey = DatabaseService.shared.coordsReference.child("\(self.runKey)").childByAutoId().key
+                let coordData = [
+                    "latitude": String(lastLocation.coordinate.latitude.description),
+                    "longitude": String(lastLocation.coordinate.longitude.description)
+                ]
+                
+                DatabaseService.shared.coordsReference.child("\(self.runKey!)").child("\(coordKey)").setValue(coordData)
+                print("coordData \(coordData)")
             }
         }
         locationList.append(location)
         
         self.mapView.showsUserLocation = true
         
-        print("locationList \(locationList)")
+
+        
         
     }
     
@@ -124,10 +135,9 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         stopButton.isHidden = false
         startButton.isHidden = true
         closeButton.isHidden = true
-        addCoord()
         startUpdatingLocation()
-        print("runKey \(self.runKey!)")
     }
+    
     @IBAction func stopTapped(_ sender: Any) {
         locationManager.stopUpdatingLocation()
         startButton.isHidden = true
@@ -135,13 +145,14 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         stopButton.isHidden = true
 
         timer?.invalidate()
-//
+
     }
     @IBAction func closeTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Run Options", message: "Would you like to save this run?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive)  { (UIAlertAction) in
             self.dismiss(animated: true, completion: {
+                //remove run if not wanted
                 DatabaseService.shared.coordsReference.child("\(self.runKey!)").setValue(nil)
             })
         }
@@ -175,7 +186,6 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func perSecond() {
         seconds += 1
         updateLabels()
-        addCoord()
     }
      func updateLabels() {
         distanceLabel.text = formatDistance(distance)
@@ -183,20 +193,8 @@ class NewRunViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
 
     
-    func addCoord() {
-        let coordKey = DatabaseService.shared.coordsReference.child("\(self.runKey)").childByAutoId().key
-        let coordData = [ "latitude": String(self.myCoordinates.latitude),
-                          "longitude": String(self.myCoordinates.longitude)
-        ]
-        
-        DatabaseService.shared.coordsReference.child("\(self.runKey!)").child("\(coordKey)").setValue(coordData)
-        
-
-    }
-
-    
     func startUpdatingLocation(){
-        locationManager.distanceFilter = 10
+        locationManager.distanceFilter = 5
         locationManager.startUpdatingLocation()
         print("started running")
     }

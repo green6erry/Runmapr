@@ -10,10 +10,10 @@ import Foundation
 import Firebase
 
 struct CoordSnap {
-    var coords : [Coord]
+    let coords : [Coord]
     
     init?(with snapshot: DataSnapshot) {
-        self.coords = [Coord]()
+        var coords = [Coord]()
         
         guard let snapCoordDictionary = snapshot.value as? [String: [String: Any]] else {return nil}
 
@@ -21,5 +21,7 @@ struct CoordSnap {
             guard let coord = Coord(coordId: snap.key, coordData: snap.value) else { continue }
             coords.append(coord)
         }
+        //sort coordinates
+        self.coords = coords.sorted(by: { $0.coordId < $1.coordId })
     }
 }

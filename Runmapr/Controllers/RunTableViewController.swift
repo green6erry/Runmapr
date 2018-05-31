@@ -13,7 +13,6 @@ import SwiftyJSON
 class RunTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-
     
     var trips = [Trip]()
     
@@ -25,11 +24,6 @@ class RunTableViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
 
-        
-     
-        
-        
-        
         DatabaseService.shared.tripsReference.observe(DataEventType.value) { (snapshot) in
             print(snapshot)
             guard let tripsSnapshot = TripSnap(with: snapshot) else { return }
@@ -74,86 +68,11 @@ class RunTableViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     
-//        print("UIStoryboardSegue")
-//        print ("duration \(self.selectedTrip!.duration)")
-
-//        detailView.dateValue =
-//        detailView.distanceValue = selectedTrip.distance
-//        detailView.durationValue = selectedTrip.duration
-        
-        
-        
-//        if let destination = segue.destination as? RunDetailsViewController,
-//            let indexPath = tableView.indexPathForSelectedRow {
-//            destination.selectedTrip = trips[indexPath.row]
-//        }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         print("didSelectRow")
-
-        
-//        let detailView = storyboard?.instantiateViewController(withIdentifier: "RunDetailsViewController") as? RunDetailsViewController
-//        //        let rtrip = trips[indexPath.row]
-//        //        detailView?.distanceLabel!.text = rtrip.distance
-//
-//        self.navigationController?.pushViewController(detailView!, animated: true)
-        
-        
-        
-//        var self.selectedTrip = trips[indexPath.row]
-//        let trip : Trip!
-//        _ = trips[indexPath.row]
-//        print(trip: )
-        
-//        detailView.distanceLabel?.text = trip.distance
-//        detailView.distanceLabel!.text = "butt"
-//        detailView?.durationLabel.text = trip.duration
-//        detailView?.dateLabel.text = String(describing: trip.date)
-        
-//        self.navigationController?.pushViewController((detailView)!, animated: true)
     }
-    
-//    @IBAction func addTapped(_ sender: Any) {
-//        let alert = UIAlertController(title: "Add run", message: "add sample data", preferredStyle: .alert)
-//
-//        alert.addTextField { (textField) in
-//            textField.placeholder = "enter duration"
-//        }
-//        alert.addTextField { (textField) in
-//            textField.placeholder = "enter date"
-//        }
-//        alert.addTextField { (textField) in
-//            textField.placeholder = "enter distance"
-//        }
-//        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        let post = UIAlertAction(title: "Post", style: .default) { _ in
-//            guard let text = alert.textFields?.description else { return }
-////            guard let text = alert.textFields?.first?.text else { return }
-//            print(text)
-//
-//            let dateString = String(describing: Date())
-//            let distance = 23
-//            let distanceString = String(distance)
-//
-//            let parameters = ["duration":   text,
-//                              "distance":   distanceString,
-//                              "date":       dateString]
-//            let key = DatabaseService.shared.tripsReference.childByAutoId().key as String?
-//
-//            let newTrip = Trip(tripId: key!, tripData: parameters)
-//
-//            DatabaseService.shared.tripsReference.childByAutoId().setValue(newTrip)
-//            self.dismiss(animated: true, completion: nil)
-//        }
-//        alert.addAction(cancel)
-//        alert.addAction(post)
-//        present(alert, animated: true) {
-//            print(alert.textFields as Any)
-//        }
-//
-//    }
-
 }
 
 
